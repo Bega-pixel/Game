@@ -8,7 +8,7 @@ class Xwing {
         this.minX = -15;
         this.y = y;
         this.vy = 0;
-       // this.drawCount = 0;
+       
         
         
 
@@ -20,7 +20,7 @@ class Xwing {
         this.sprite.verticalFrames = 1;
         this.sprite.horizontalFramesIndex = 1;
         this.sprite.verticalFramesIndex = 0;
-/*
+/* tiefigther
        this.sprite.horizontalFrames = 1;
         this.sprite.verticalFrames = 1;
         this.sprite.horizontalFramesIndex = 0;
@@ -40,6 +40,8 @@ class Xwing {
             left: false,
             right: false
         }
+            this.drawCount = 0;
+
     }
 
         onKeyEvent(event){
@@ -71,8 +73,9 @@ class Xwing {
 
 
             );
-            //this.drawCount++;
-
+            
+            this.drawCount++;
+           this.animate();
         }
     }
 
@@ -80,10 +83,13 @@ class Xwing {
 
         if (this.movement.right) {
             this.vx = SPEED;
+         //   this.sprite.horizontalFramesIndex = 2;
         }else if (this.movement.left) {
             this.vx = -SPEED;
+         //   this.sprite.horizontalFramesIndex = 0;
         }else{
             this.vx = 0;
+        //    this.sprite.horizontalFramesIndex = 1;
         }
 
         this.x += this.vx;
@@ -96,6 +102,15 @@ class Xwing {
         }
     }
 
-    
+    animate(){
+        if (this.movement.right) {     
+            this.sprite.horizontalFramesIndex = 2;
+        }else if (this.movement.left) {
+            this.sprite.horizontalFramesIndex = 0;
+        }else{
+            this.sprite.horizontalFramesIndex = 1;
+        }
+    }
 
-}
+
+    }

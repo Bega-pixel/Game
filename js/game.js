@@ -49,4 +49,8 @@ class Game {
         this.xwing.move();
     }
 
+    /* enGame() {
+        this.stop();
+     } */
+
 }
