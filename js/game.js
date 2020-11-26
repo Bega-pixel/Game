@@ -11,7 +11,7 @@ class Game {
 
         this.background = new Background(this.ctx);
         //
-       this.xwing = new Xwing (this.ctx, 680 ,875);
+       this.xwing = new Xwing (this.ctx, 680 ,850);
     }
 
    

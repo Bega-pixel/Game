@@ -38,8 +38,8 @@ class Xwing {
             //console.log();
             this.ctx.drawImage(
                 this.sprite,
-                this.sprite.frameWidth * this.sprite.horizontalFrameIndex,
-                this.sprite.frameHeight * this.sprite.verticalFrameIndex,
+                this.sprite.frameWidth * this.sprite.horizontalFramesIndex,
+                this.sprite.frameHeight * this.sprite.verticalFramesIndex,
                 this.sprite.frameWidth,
                 this.sprite.frameHeight,
                 this.x,
