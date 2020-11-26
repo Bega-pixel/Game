@@ -3,8 +3,13 @@ class Xwing {
     constructor(ctx, x ,y ) {
         this.ctx = ctx;
         this.x = x;
+        this.vx = 0;
+        this.maxX = 1279;
+        this.minX = -15;
         this.y = y;
-        this.drawCount = 0;
+        this.vy = 0;
+       // this.drawCount = 0;
+        
         
 
         this.sprite = new Image();
@@ -31,7 +36,24 @@ class Xwing {
 
         }
 
+        this.movement = {
+            left: false,
+            right: false
+        }
     }
+
+        onKeyEvent(event){
+            const state = event.type === 'keydown';
+            switch (event.keyCode) {
+                    case KEY_RIGHT:
+                        this.movement.right = state;
+                        break;
+                        case KEY_LEFT:
+                            this.movement.left = state;
+                            break;    
+            }
+        }
+
 
     draw() {
         if(this.sprite.isReady) {
@@ -49,8 +71,31 @@ class Xwing {
 
 
             );
-            this.drawCount++;
+            //this.drawCount++;
+
         }
     }
+
+    move() {
+
+        if (this.movement.right) {
+            this.vx = SPEED;
+        }else if (this.movement.left) {
+            this.vx = -SPEED;
+        }else{
+            this.vx = 0;
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x >= this.maxX) {
+            this.x = this.maxX;
+        }else if (this.x <= this.minX) {
+            this.x = this.minX;
+        }
+    }
+
+    
 
 }

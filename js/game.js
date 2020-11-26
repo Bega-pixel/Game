@@ -15,13 +15,17 @@ class Game {
     }
 
    
+    onKeyEvent(event) {
+        this.xwing.onKeyEvent(event);
+    }
      
 
     start () {
         if(!this.drawIntervalId) {
-        this.drawIntervalId = setInterval(() => {
-        this.clear();
-            this.draw();
+         this.drawIntervalId = setInterval(() => {
+         this.clear();
+         this.move();
+         this.draw();
        }, this.fps);
     }
  }
@@ -39,6 +43,10 @@ class Game {
         this.background.draw();
         //
         this.xwing.draw();
+    }
+
+    move(){
+        this.xwing.move();
     }
 
 }
