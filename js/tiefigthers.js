@@ -24,7 +24,7 @@ constructor(ctx, x ,y ) {
     this.sprite.verticalFramesIndex = 0;
 
     this.sprite.onload = () => {
-        console.log('loaded');
+       // console.log('loaded');
         this.sprite.isReady = true;
         this.sprite.frameWidth = Math.floor(this.sprite.width / this.sprite.horizontalFrames);
         this.sprite.frameHeight = Math.floor(this.sprite.height / this.sprite.verticalFrames);

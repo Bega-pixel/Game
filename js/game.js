@@ -1,4 +1,5 @@
 class Game {
+    
 
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
@@ -13,7 +14,9 @@ class Game {
         //
        this.xwing = new Xwing (this.ctx, 680 ,850);
 
-       this.tiefigther =new Tiefigther(this.ctx ,500 , 300);
+       this.tiefigther = new Tiefigther(this.ctx ,500 , 300);
+    
+       this.lasershoot = new Lasershoot(this.ctx, 680 ,750);
     }
 
    
@@ -47,11 +50,14 @@ class Game {
         this.xwing.draw();
 
         this.tiefigther.draw();
+
+        this.lasershoot.draw();
         
     }
 
     move(){
         this.xwing.move();
+        this.lasershoot.move();
     }
 
     /* enGame() {

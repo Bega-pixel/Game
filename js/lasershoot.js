@@ -43,7 +43,7 @@ draw() {
   }
 
   move() {
-    this.y += this.vy;
+    this.y -= this.vy;
 
 
   }
