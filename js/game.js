@@ -12,6 +12,8 @@ class Game {
         this.background = new Background(this.ctx);
         //
        this.xwing = new Xwing (this.ctx, 680 ,850);
+
+       this.tiefigther =new Tiefigther(this.ctx ,500 , 300);
     }
 
    
@@ -41,8 +43,11 @@ class Game {
 
     draw() {
         this.background.draw();
-        //
+
         this.xwing.draw();
+
+        this.tiefigther.draw();
+        
     }
 
     move(){

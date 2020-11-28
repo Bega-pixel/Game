@@ -9,8 +9,6 @@ class Xwing {
         this.y = y;
         this.vy = 0;
        
-        
-        
 
         this.sprite = new Image();
         this.sprite.src = './img/RogueSquadron/X-Wing.png';
@@ -20,12 +18,7 @@ class Xwing {
         this.sprite.verticalFrames = 1;
         this.sprite.horizontalFramesIndex = 1;
         this.sprite.verticalFramesIndex = 0;
-/* tiefigther
-       this.sprite.horizontalFrames = 1;
-        this.sprite.verticalFrames = 1;
-        this.sprite.horizontalFramesIndex = 0;
-        this.sprite.verticalFramesIndex = 0;
-*/
+
         this.sprite.onload = () => {
             //console.log('loaded');
             this.sprite.isReady = true;
@@ -40,7 +33,11 @@ class Xwing {
             left: false,
             right: false
         }
-            this.drawCount = 0;
+
+        this.canFire = true;
+        this.lasers = [];
+
+        this.drawCount = 0;
 
     }
 
@@ -52,9 +49,25 @@ class Xwing {
                         break;
                         case KEY_LEFT:
                             this.movement.left = state;
-                            break;    
+                            break;   
+                            
+                            
+                            case KEY_FIRE:
+                                this.canFire = state;   
+                                    this.xwing.fireLaser( () => {
+                                        if (this.lasers.length === 0){
+                                            this.lasers.push(new laser(this.x, this.y, true))
+                                        }  
+                                    });
+                                                           
+                                 break;
+
             }
         }
+
+        clear() {
+            this.lasers = this.lasers.filter(laser => laser.x <= this.ctx.canvas.width)
+          }
 
 
     draw() {
@@ -73,13 +86,17 @@ class Xwing {
 
 
             );
-            
+            this.lasers.forEach(laser => laser.draw());
             this.drawCount++;
            this.animate();
         }
     }
 
     move() {
+       
+        
+        this.lasers.forEach(laser => laser.move());
+
 
         if (this.movement.right) {
             this.vx = SPEED;
