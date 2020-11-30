@@ -35,7 +35,7 @@ class Xwing {
         }
 
         this.canFire = true;
-        this.lasers = [];
+        this.lasershoots = [];
 
         this.drawCount = 0;
 
@@ -54,12 +54,9 @@ class Xwing {
                             
                             case KEY_FIRE:
                                 this.canFire = state;   
-                                    this.xwing.fireLaser( () => {
-                                        if (this.lasers.length === 0){
-                                            this.lasers.push(new laser(this.x, this.y, true))
-                                        }  
-                                    });
-                                                           
+                                    this.lasershoot = new Lasershoot(this.ctx, this.x, this.y-70) ;
+                                    this.lasershoots.push(this.lasershoot);
+                                    
                                  break;
 
             }
@@ -84,9 +81,8 @@ class Xwing {
                 this.width,
                 this.height
 
-
             );
-            this.lasers.forEach(laser => laser.draw());
+            this.lasershoots.map( laser => laser.draw() );
             this.drawCount++;
            this.animate();
         }
@@ -94,10 +90,8 @@ class Xwing {
 
     move() {
        
+        this.lasershoots.map( laser => laser.move() )
         
-        this.lasers.forEach(laser => laser.move());
-
-
         if (this.movement.right) {
             this.vx = SPEED;
          //   this.sprite.horizontalFramesIndex = 2;
@@ -129,5 +123,11 @@ class Xwing {
         }
     }
 
+    collides(element) {
+        return this.x < element.x + element.width &&
+          this.x + this.width > element.x &&
+          this.y < element.y + element.height &&
+          this.y + this.height > element.y;
+      }
 
     }

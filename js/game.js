@@ -14,7 +14,7 @@ class Game {
         //
        this.xwing = new Xwing (this.ctx, 680 ,850);
 
-       this.tiefigther = new Tiefigther(this.ctx ,500 , 300);
+       this.tiefigther = new Tiefigther(this.ctx ,680 , 300);
     
        this.lasershoot = new Lasershoot(this.ctx, 680 ,750);
     }
@@ -31,6 +31,10 @@ class Game {
          this.clear();
          this.move();
          this.draw();
+
+
+         this.checkCollisions();
+
        }, this.fps);
     }
  }
@@ -51,17 +55,24 @@ class Game {
 
         this.tiefigther.draw();
 
-        this.lasershoot.draw();
+       // this.lasershoot.draw();
+        this.lasershoots.draw();
         
     }
 
     move(){
         this.xwing.move();
         this.lasershoot.move();
+       // this.lasershoots.move();
     }
 
     /* enGame() {
         this.stop();
      } */
+     checkCollisions() {
+         const nocollidesLaser =  this.lasershoot.filter(lasershoot => 
+             !this.tiefigther.collides(lasershoot));
+             this.lasershoot = nocollidesLaser;
+     }
 
 }
