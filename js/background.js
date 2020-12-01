@@ -5,8 +5,9 @@ class Background {
         this.y = 0;
 
         this.img = new Image();
-       //this.img.src = './img/Lunasatelite.png';
-        this.img.src = './img/WorldShips.jpg';
+       this.img.src = './img/WorldShips2.jpg';
+       // this.img.src = './img/WorldShips.jpg';
+        
         this.img.onload = () => {
             this.img.isReady = true;
             this.img.width = this.ctx.canvas.width;

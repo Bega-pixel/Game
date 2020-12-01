@@ -49,8 +49,7 @@ class Xwing {
                         break;
                         case KEY_LEFT:
                             this.movement.left = state;
-                            break;   
-                            
+                            break;                      
                             
                             case KEY_FIRE:
                                 this.canFire = state;   

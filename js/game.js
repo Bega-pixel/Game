@@ -14,11 +14,38 @@ class Game {
         //
        this.xwing = new Xwing (this.ctx, 680 ,850);
 
-       this.tiefigther = new Tiefigther(this.ctx ,680 , 300);
+      // this.tiefigther = new Tiefigther(this.ctx ,680 , 300);
     
        this.lasershoot = new Lasershoot(this.ctx, 680 ,750);
-    }
 
+       this.tiefigthers = [
+        new Tiefigther(this.ctx ,10 , 10),
+        new Tiefigther(this.ctx ,110 , 10),
+        new Tiefigther(this.ctx ,210 , 10),
+        new Tiefigther(this.ctx ,310 , 10),
+        new Tiefigther(this.ctx ,410 , 10),
+        new Tiefigther(this.ctx ,510 , 10),
+        new Tiefigther(this.ctx ,610 , 10),
+        new Tiefigther(this.ctx ,710 , 10),
+        new Tiefigther(this.ctx ,810 , 10),
+        new Tiefigther(this.ctx ,910 , 10),
+        new Tiefigther(this.ctx ,1010 , 10),
+        new Tiefigther(this.ctx ,1110 , 10),
+        new Tiefigther(this.ctx ,10 , 110),
+        new Tiefigther(this.ctx ,110 , 110),
+        new Tiefigther(this.ctx ,210 , 110),
+        new Tiefigther(this.ctx ,310 , 110),
+        new Tiefigther(this.ctx ,410 , 110),
+        new Tiefigther(this.ctx ,510 , 110),
+        new Tiefigther(this.ctx ,610 , 110),
+        new Tiefigther(this.ctx ,710 , 110),
+        new Tiefigther(this.ctx ,810 , 110),
+        new Tiefigther(this.ctx ,910 , 110),
+        new Tiefigther(this.ctx ,1010 , 110),
+        new Tiefigther(this.ctx ,1110 , 110),
+       ];
+    }
+    
    
     onKeyEvent(event) {
         this.xwing.onKeyEvent(event);
@@ -33,7 +60,7 @@ class Game {
          this.draw();
 
 
-         this.checkCollisions();
+        // this.checkCollisions();
 
        }, this.fps);
     }
@@ -53,10 +80,11 @@ class Game {
 
         this.xwing.draw();
 
-        this.tiefigther.draw();
-
+       // this.tiefigther.draw();
        // this.lasershoot.draw();
-        this.lasershoots.draw();
+       //this.lasershoots.draw();
+
+        this.tiefigthers.forEach(tiefigther => tiefigther.draw());
         
     }
 
@@ -64,15 +92,17 @@ class Game {
         this.xwing.move();
         this.lasershoot.move();
        // this.lasershoots.move();
+      // this.tiefigthers.move();
+       this.tiefigthers.forEach(tiefigther => tiefigther.move());
     }
 
     /* enGame() {
         this.stop();
      } */
      checkCollisions() {
-         const nocollidesLaser =  this.lasershoot.filter(lasershoot => 
-             !this.tiefigther.collides(lasershoot));
-             this.lasershoot = nocollidesLaser;
+         const noCollidesLaser =  this.tiefigthers.filter(tiefigther => 
+             !this.lasershoot.collides(tiefigther));
+             this.tiefigthers = noCollidesLaser;
      }
 
 }

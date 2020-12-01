@@ -7,6 +7,10 @@ constructor(ctx, x ,y ) {
     this.minX = -15;
     this.y = y;
     this.vy = 0;
+    this.dirX = 1;
+    this.dirY = 0;
+
+    
    
 
     this.sprite = new Image();
@@ -48,10 +52,39 @@ draw() {
             this.width,
             this.height
 
+            
 
         );
         
     }
+
+}
+
+
+
+move(){
+  
+    this.x = this.x + this.dirX;
+    this.y = this.y + this.dirY;
+
+    if (this.x >= this.maxX) {
+        this.x = this.maxX;
+    }else if (this.x <= this.minX) {
+        this.x = this.minX;
+    }
+    
+   
+if(this.x === this.maxX){
+      
+      this.dirX *= -1;
+      this.y += 165;
+}else if(this.x === this.minX){
+    this.dirX += 1;
+      this.y += 100;
+
+}
+
+
 
 }
 
