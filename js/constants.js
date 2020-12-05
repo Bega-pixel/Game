@@ -5,5 +5,5 @@ const KEY_LEFT = 37;
 const KEY_FIRE = 32;
 
 const SPEED = 5;
-
+const SPEED2 = 6;
 // pause/break = 19

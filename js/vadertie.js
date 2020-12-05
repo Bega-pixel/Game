@@ -1,28 +1,27 @@
-class Tiefigther {
+class Vadertie {
+
   constructor(ctx, x, y) {
     this.ctx = ctx;
     this.x = x;
     this.vx = 0;
-    this.maxX = 1379;
-    this.minX = 0;
+    this.maxX = 1230;
+    this.minX = 30;
     this.y = y;
     this.vy = 0;
     this.dirX = 1;
     this.dirY = 0;
-    this.width = 0;
-    this.height = 0;
 
     this.sprite = new Image();
-    this.sprite.src = './img/RogueSquadron/Tiefigtrs2.png';
+    this.sprite.src = './img/RogueSquadron/Vadertie.sprite.png';
     this.sprite.isReady = false;
 
-    this.sprite.horizontalFrames = 3;
+    this.sprite.horizontalFrames = 1;
     this.sprite.verticalFrames = 1;
-    this.sprite.horizontalFramesIndex = 1;
+    this.sprite.horizontalFramesIndex = 0;
     this.sprite.verticalFramesIndex = 0;
 
     this.sprite.onload = () => {
-      // console.log('loaded');
+      //console.log('loaded');
       this.sprite.isReady = true;
       this.sprite.frameWidth = Math.floor(this.sprite.width / this.sprite.horizontalFrames);
       this.sprite.frameHeight = Math.floor(this.sprite.height / this.sprite.verticalFrames);
@@ -45,12 +44,11 @@ class Tiefigther {
         this.y,
         this.width,
         this.height
+
       );
     }
   }
-
   move() {
-
     this.x = this.x + this.dirX;
     this.y = this.y + this.dirY;
 
@@ -62,13 +60,15 @@ class Tiefigther {
 
     if (this.x === this.maxX) {
       this.dirX *= -2;
-      this.y += 203;
-      this.sprite.horizontalFramesIndex = 0;
+      this.y += 60;
+      //this.sprite.horizontalFramesIndex = 0;
+
     } else if (this.x === this.minX) {
-      this.dirX += 2;
-      this.y += 105;
-      this.sprite.horizontalFramesIndex = 2;
+      this.dirX += 4;
+      this.y += 60;
+      //this.sprite.horizontalFramesIndex = 2;
     }
+
   }
 
   collides(element) {
@@ -77,4 +77,5 @@ class Tiefigther {
       this.y < element.y + element.height &&
       this.y + this.height > element.y;
   }
+
 }

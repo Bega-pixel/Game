@@ -6,12 +6,16 @@ html,body {
     margin: 0;
     
     background-color:black;
-
 }
 
 body * {
     box-sizing: border-box;
 }
+
+/*
+body{
+    background-image: url("paper.gif") ;
+}*/
 
 /*.canvas-box {
  margin: 25%;
