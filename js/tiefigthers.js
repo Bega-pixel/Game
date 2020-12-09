@@ -3,7 +3,7 @@ class Tiefigther {
     this.ctx = ctx;
     this.x = x;
     this.vx = 0;
-    this.maxX = 1379;
+    this.maxX = 1675;
     this.minX = 0;
     this.y = y;
     this.vy = 0;
@@ -47,6 +47,9 @@ class Tiefigther {
         this.height
       );
     }
+   /* this.sounds = {
+      flyby: new Audio('scr','../asst/sound/tiefigther1.wav')
+    }*/
   }
 
   move() {
@@ -61,11 +64,13 @@ class Tiefigther {
     }
 
     if (this.x === this.maxX) {
-      this.dirX *= -2;
+      this.dirX *= -4;
       this.y += 203;
       this.sprite.horizontalFramesIndex = 0;
+      //this.sounds.flyby.currentTime = 0;
+      //this.sounds.flyby.play();
     } else if (this.x === this.minX) {
-      this.dirX += 2;
+      this.dirX += 4;
       this.y += 105;
       this.sprite.horizontalFramesIndex = 2;
     }

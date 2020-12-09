@@ -12,19 +12,6 @@ body * {
     box-sizing: border-box;
 }
 
-/*
-body{
-    background-image: url("paper.gif") ;
-}*/
-
-/*.canvas-box {
- margin: 25%;
+#game-canvas{
+ margin-left:5%;    
 }
-
-
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-*/

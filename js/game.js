@@ -2,20 +2,59 @@ class Game {
 
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
-    this.canvas.width = 1460;
-    this.canvas.height = 985;
+    this.canvas.width = 1760;
+    this.canvas.height = 975;
     this.ctx = this.canvas.getContext('2d');
-
     this.fps = 1000 / 60
     this.drawIntervalId = undefined;
 
     this.background = new Background(this.ctx);
-
     this.xwing = new Xwing(this.ctx, 680, 875);
 
-    this.vadertie = new Vadertie(this.ctx, 10, -880);
+    this.vaderties = [
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690),
+      new Vadertie(this.ctx, 10, -690)
 
-    //this.lasershoot = new Lasershoot(this.ctx, 680, 750);
+    ];
 
     this.tiefigthers = [
       new Tiefigther(this.ctx, 10, 10),
@@ -32,6 +71,10 @@ class Game {
       new Tiefigther(this.ctx, 1110, 10),
       new Tiefigther(this.ctx, 1210, 10),
       new Tiefigther(this.ctx, 1310, 10),
+      new Tiefigther(this.ctx, 1410, 10),
+      new Tiefigther(this.ctx, 1510, 10),
+      new Tiefigther(this.ctx, 1610, 10),
+      new Tiefigther(this.ctx, 1710, 10),
 
       new Tiefigther(this.ctx, 10, 80),
       new Tiefigther(this.ctx, 110, 80),
@@ -47,6 +90,10 @@ class Game {
       new Tiefigther(this.ctx, 1110, 80),
       new Tiefigther(this.ctx, 1210, 80),
       new Tiefigther(this.ctx, 1310, 80),
+      new Tiefigther(this.ctx, 1410, 80),
+      new Tiefigther(this.ctx, 1510, 80),
+      new Tiefigther(this.ctx, 1610, 80),
+      new Tiefigther(this.ctx, 1710, 80),
 
       new Tiefigther(this.ctx, 10, 150),
       new Tiefigther(this.ctx, 110, 150),
@@ -61,7 +108,11 @@ class Game {
       new Tiefigther(this.ctx, 1010, 150),
       new Tiefigther(this.ctx, 1110, 150),
       new Tiefigther(this.ctx, 1210, 150),
-      new Tiefigther(this.ctx, 1310, 150)
+      new Tiefigther(this.ctx, 1310, 150),
+      new Tiefigther(this.ctx, 1410, 150),
+      new Tiefigther(this.ctx, 1510, 150),
+      new Tiefigther(this.ctx, 1610, 150),
+      new Tiefigther(this.ctx, 1710, 150)
     ];
 
     this.canFire = true;
@@ -69,6 +120,16 @@ class Game {
 
     this.canFire = true;
     this.lasershoots = [];
+/*
+    this.textAnswer = {
+      over:false,
+      title: '',
+      subtitle: ''
+      fillStyle: 'red',
+    };
+    this.gameState = {
+         state:'on'
+    };*/
   }
 
 
@@ -83,7 +144,8 @@ class Game {
         this.move();
         this.draw();
         this.checkCollisions();
-        this.checkCollisions1();
+       // this.dText();
+       // this.gameStatus();
 
       }, this.fps);
     }
@@ -92,8 +154,15 @@ class Game {
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     //this.lasershoots = this.lasershoots.filter(lasershoot => (lasershoot.y + lasershoot.height) <= 0);
-    //this.lasershootsties = this.lasershootsties.filter(lasershoottie => (lasershoottie.y + lasershoot.height) > 985);
     //this.tiefigthers = this.tiefigthers.filter(tiefigther => (tiefigther.y + tiefigther.height) > 985);
+    this.xwing.clear();
+
+    for (let m = 0; m < this.xwing.lasershoots.length; m++) {
+      if(m.y <=0){
+      this.lasershoots.splice([m], 1);
+      }
+    }
+  
   }
 
   stop() {
@@ -103,26 +172,20 @@ class Game {
 
   draw() {
     this.background.draw();
-
     this.xwing.draw();
-
-    this.vadertie.draw();
-
-    // this.tiefigther.draw();
-    // this.lasershoot.draw();
-    //this.lasershoottie.draw();
+   
     this.lasershoots.map(laser => laser.draw());
+    this.vaderties.forEach(vadertie => vadertie.draw());
     this.tiefigthers.forEach(tiefigther => tiefigther.draw());
     this.lasershootsties.map(laser => laser.draw());
+    
 
   }
 
   move() {
     this.xwing.move();
     this.lasershoots.map(laser => laser.move())
-    // this.lasershoot.move();
-    // this.lasershoottie.move();
-    this.vadertie.move();
+    this.vaderties.forEach(vadertie => vadertie.move());
     this.tiefigthers.forEach(tiefigther => tiefigther.move());
     this.lasershootsties.map(laser => laser.move())
   }
@@ -140,20 +203,30 @@ class Game {
   }
   */
 
-  /* enGame() {
+   enGame() {
       this.stop();
-   } */
-  checkCollisions() {
-    const noCollidesLaser = this.tiefigthers.filter(tiefigther =>
-      !this.xwing.collides(tiefigther));
-    this.tiefigthers = noCollidesLaser;
+   } 
 
-    /*
-     for (let k =0 ; k< this.lasershoots.length; k++) {
-       if(this.vadertie.collides(lasershoot[k])){
-           this.vadertie.clear(lasershoot[k]);
-       }
-     }*/
+    stop(){
+      clearInterval(this.setIntervalId);
+      this.drawIntervalId = undefined;
+    }
+   
+
+  checkCollisions() {
+   
+    for (let c = 0; c < this.tiefigthers.length; c++) {
+      if (this.xwing.collides(this.tiefigthers[c])) {
+        this.tiefigthers.splice([c], 1);
+      }
+    }
+
+    for (let t = 0; t < this.vaderties.length; t++) {
+      if (this.xwing.collides(this.vaderties[t])) {
+        this.vaderties.splice([t], 1);
+      }
+    }
+
 
     for (let i = 0; i < this.xwing.lasershoots.length; i++) {
 
@@ -165,19 +238,76 @@ class Game {
         }
       }
     }
+
+    
+    for (let k = 0; k < this.xwing.lasershoots.length; k++) {
+
+      for (let l = 0; l < this.vaderties.length; l++) {
+        if (this.xwing.lasershoots[k].collides(this.vaderties[l])) {
+
+          this.xwing.lasershoots.splice([k], 1);
+          this.vaderties.splice([l], 1);
+        }
+      }
+    }
+
+
+  }
+/*
+  gameStatus(){
+    if(this.gameState.state === 'playing' && this. tiefigthers.length === 0){
+      state = 'victory';
+      this.textAnswer.title = 'You Win and will warp to met with the Rebels';
+      this.textAnswer.subtitle = 'Press R to continue';
+      this.textAnswer.count = 0;
+    }
+    if(this.textAnswer.count >=0){
+      this.textAnswer.contador++;
+    }
   }
 
-  checkCollisions1() {
-    this.lasershoot = new Lasershoot(this.ctx, 680, 750);
-    /*
+  dText(){
+    if(this.textAnswer.count === -1 ) return;
+    const alpha = this.textAnswer.count / 50.0;
+    if(alpha>1){
+      for(let i in this.tiefigthers){
+            delete this.tiefigthers[i];
+      }
+    }
+    this.ctx.save();
+    this.ctx.globalAlpha = alpha;
+    if(this.gameState.state === 'lost'){
+      this.ctx.fillText(this.textAnswer.title, 120, 190);
+      this.ctx.fillstyle = 'white';
+      this.ctx.font = 'bold 40pt Arial';
 
-     const noCollidesLaser = this.tiefigthers.filter(tiefigther =>
-      !this.xwing.collides(tiefigther));*/
-
-    /*
-     if(this.lasershoot.collides(this.vadertie) === 3 ){
-    this.vadertie.clear();
-     }*/
+      this.ctx.fillText(this.textAnswer.subtitle, 120, 190);
+      this.ctx.fillstyle = 'white';
+      this.ctx.font = 'bold 40pt Arial';
+    }
+    if(this.gameState.state === 'victory'){
+      this.ctx.fillText(this.textAnswer.title, 120, 190);
+      this.ctx.fillstyle = 'white';
+      this.ctx.font = 'bold 40pt Arial';
+      this.ctx.fillText(this.textAnswer.subtitle, 120, 190);
+      this.ctx.fillstyle = 'white';
+      this.ctx.font = 'bold 40pt Arial';
+    }
   }
 
+
+  shootsAdd(tiefigther){
+  return {
+  x: tiefigther.x,
+  y: tiefigther.y,
+  width: this.lasershootsties,
+  heigth: this.lasershootsties,
+  count: 0
+
+  
 }
+  }
+
+*/
+}
+

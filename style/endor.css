@@ -1,0 +1,90 @@
+@keyframes DeathStar {
+    0%{
+       top:-100px; 
+       transform : rotateX(20deg) translateZ(0);
+    }
+    100%{
+        top:-6000px; 
+       transform : rotateX(25deg) translateZ(-2500px);
+    }
+}
+body{
+    background-color:#000000;
+    width:100%;
+    height: 100%; 
+    overflow: hidden;
+    font-family: sans-serif;
+    position: relative;
+}
+
+section {
+    color:#fcca03;
+    display:flex;
+    justify-content: center;
+    height:800px; 
+    font-size: 500%;
+    font-weight: 600;
+    letter-spacing: 6px;
+    line-Height: 1.5em;
+    perspective: 400px;
+    text-align: center;
+    background-color: black;
+}
+/*
+.fade{
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    top: -25px;
+    background-image: linear-gradient(0dg,transparent ,#000 75%);
+}
+*/
+
+.Jabba{
+ background-color: black;
+}
+
+.JabbaPalace{
+    position: relative;
+    top:99999px;
+    transform-origin: 50% 100%;
+    animation: DeathStar 70s linear;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+}
+
+.Ewoks{
+    font-size:90%;
+    text-align: center;
+}
+
+.Ewoks h1,h2,h5 {
+    margin: 0 0 100px;
+    text-transform: uppercase;
+
+ }
+
+ a{
+     color:Blue;
+     margin-right: 50%;
+     text-align: center;
+ }
+
+ h1, a{
+     font-size: 350px;
+     color: transparent;
+     -webkit-text-stroke: 4px #fcca03;
+     -moz-text-stroke:4px #fcca03;
+ }
+
+ h5{
+     font-size: 250px;
+ }
+
+ iframe:focus {
+    outline: none;
+  }
+  
+  iframe[seamless] {
+    display: block;
+  }

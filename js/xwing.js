@@ -4,7 +4,7 @@ class Xwing {
     this.ctx = ctx;
     this.x = x;
     this.vx = 0;
-    this.maxX = 1379;
+    this.maxX = 1680;
     this.minX = -15;
     this.y = y;
     this.vy = 0;
@@ -32,7 +32,8 @@ class Xwing {
 
     this.movement = {
       left: false,
-      right: false
+      right: false,
+      reload:false
     }
 
     this.canFire = true;
@@ -57,9 +58,12 @@ class Xwing {
         this.lasershoot = new Lasershoot(this.ctx, this.x, this.y - 70);
         this.lasershoots.push(this.lasershoot);
         break;
+
+       case RELOAD:
+         this.movement.reload = state;
+         break 
     }
   }
-
 
   draw() {
     if (this.sprite.isReady) {
@@ -106,13 +110,10 @@ class Xwing {
       this.x = this.minX;
     }
   }
+
   clear() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.lasershoots = this.lasershoots.filter(lasershoot => (lasershoot.y + lasershoot.height) <= 0);
-    //this.xwing.clear();
-
+     
   }
-
 
   animate() {
     if (this.movement.right) {
@@ -130,6 +131,5 @@ class Xwing {
       this.y < element.y + element.height &&
       this.y + this.height > element.y;
   }
-
 
 }

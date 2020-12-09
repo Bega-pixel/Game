@@ -4,14 +4,14 @@ class Lasershoot {
     this.ctx = ctx;
     this.x = x;
     this.vx = SPEED;
-
     this.y = y;
     this.vy = SPEED;
     this.width = 0;
     this.height = 0;
-
+    
     this.sprite = new Image();
-    this.sprite.src = './img/RogueSquadron/lasershoot.png';
+    //this.sprite.src = './img/RogueSquadron/lasershoot.png';
+    this.sprite.src = './img/RogueSquadron/Lasershoot1.png';
     this.sprite.horizontalFramesIndex = 0;
     this.sprite.verticalFramesIndex = 0;
     this.sprite.horizontalFrames = 1;
@@ -46,9 +46,7 @@ class Lasershoot {
 
   move() {
     this.y -= this.vy;
-
 }
-
 
 collides(element) {
   return this.x < element.x + element.width &&
