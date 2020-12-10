@@ -53,7 +53,6 @@ class Game {
       new Vadertie(this.ctx, 10, -690),
       new Vadertie(this.ctx, 10, -690),
       new Vadertie(this.ctx, 10, -690)
-
     ];
 
     this.tiefigthers = [
@@ -117,21 +116,16 @@ class Game {
 
     this.canFire = true;
     this.lasershootsties = [];
+    this.drawCount = 0;
 
-    this.canFire = true;
-    this.lasershoots = [];
-/*
-    this.textAnswer = {
-      over:false,
-      title: '',
-      subtitle: ''
+    this.gameStatus = {
+      over: false,
+      message: "",
       fillStyle: 'red',
-    };
-    this.gameState = {
-         state:'on'
-    };*/
-  }
+      font: 'italic bold 36px Arial, sans-serif',
+    }
 
+  }
 
   onKeyEvent(event) {
     this.xwing.onKeyEvent(event);
@@ -144,8 +138,7 @@ class Game {
         this.move();
         this.draw();
         this.checkCollisions();
-       // this.dText();
-       // this.gameStatus();
+
 
       }, this.fps);
     }
@@ -158,11 +151,11 @@ class Game {
     this.xwing.clear();
 
     for (let m = 0; m < this.xwing.lasershoots.length; m++) {
-      if(m.y <=0){
-      this.lasershoots.splice([m], 1);
+      if (m.y <= 0) {
+        this.lasershoots.splice([m], 1);
       }
     }
-  
+
   }
 
   stop() {
@@ -173,21 +166,27 @@ class Game {
   draw() {
     this.background.draw();
     this.xwing.draw();
-   
-    this.lasershoots.map(laser => laser.draw());
     this.vaderties.forEach(vadertie => vadertie.draw());
     this.tiefigthers.forEach(tiefigther => tiefigther.draw());
     this.lasershootsties.map(laser => laser.draw());
-    
+
+    if (this.tiefigthers.length === 0 && this.vaderties.length === 0) {
+      clearInterval(this.drawIntervalId);
+      ctx.fillStyle = 'Green';
+      ctx.font = this.gameStatus.font;
+      ctx.fillText('You Scape and will warp to met with the Rebels!', this.width * .5 - 80, 50);
+      alert('You Scape and will warp to met with the Rebels!');
+    }
+
 
   }
 
   move() {
     this.xwing.move();
-    this.lasershoots.map(laser => laser.move())
     this.vaderties.forEach(vadertie => vadertie.move());
     this.tiefigthers.forEach(tiefigther => tiefigther.move());
     this.lasershootsties.map(laser => laser.move())
+    //this.tiefigthers.forEach(tiefigther => tiefigther.shooting());
   }
   /*
     tiefigthersShootLaser(){
@@ -203,30 +202,85 @@ class Game {
   }
   */
 
-   enGame() {
-      this.stop();
-   } 
+  endGame() {
+    this.stop();
+  }
 
-    stop(){
-      clearInterval(this.setIntervalId);
-      this.drawIntervalId = undefined;
-    }
-   
+  stop() {
+    clearInterval(this.setIntervalId);
+    this.drawIntervalId = undefined;
+  }
 
   checkCollisions() {
-   
+
     for (let c = 0; c < this.tiefigthers.length; c++) {
       if (this.xwing.collides(this.tiefigthers[c])) {
         this.tiefigthers.splice([c], 1);
+        this.gameStatus.over = true;
+        this.gameStatus.message = 'You Died!'
+        //alert('Just take the wrong turn You Died!');
+        //swal('Just take the wrong turn You Died!');
+        swal("Just not your lucky day You Died!", {
+            buttons: {
+              cancel: "Yoda",
+              catch: {
+                text: "Try again",
+                value: "catch",
+              },
+              defeat: true,
+            },
+          })
+          .then((value) => {
+            switch (value) {
+
+              case "defeat":
+                swal("Do. Or do not. There is no try.! You gained 500 XP!");
+                break;
+
+              case "catch":
+                swal("The force is strong with you");
+                break;
+
+              default:
+                swal(" A Jedi uses the Force for knowledge and defense, never for attack.");
+            }
+          });
       }
     }
 
     for (let t = 0; t < this.vaderties.length; t++) {
       if (this.xwing.collides(this.vaderties[t])) {
         this.vaderties.splice([t], 1);
+        this.gameStatus.over = true;
+        this.gameStatus.message = 'You Died!'
+        //alert('The force is not strong with you, Dead!');
+        swal("The force is not strong with you, Dead!", {
+            buttons: {
+              cancel: "Yoda",
+              catch: {
+                text: "Try again",
+                value: "catch",
+              },
+              defeat: true,
+            },
+          })
+          .then((value) => {
+            switch (value) {
+
+              case "defeat":
+                swal("Wars not make one great! You gained 1000 XP!");
+                break;
+
+              case "catch":
+                swal("The force is strong with you");
+                break;
+
+              default:
+                swal("Fear is the path to the dark side…fear leads to anger…anger leads to hate…hate leads to suffering.");
+            }
+          });
       }
     }
-
 
     for (let i = 0; i < this.xwing.lasershoots.length; i++) {
 
@@ -239,7 +293,6 @@ class Game {
       }
     }
 
-    
     for (let k = 0; k < this.xwing.lasershoots.length; k++) {
 
       for (let l = 0; l < this.vaderties.length; l++) {
@@ -251,63 +304,60 @@ class Game {
       }
     }
 
+    if (this.tiefigthers.y > 975 || this.vaderties.y > 975) {
+      this.gameStatus.over = true;
+      this.gameStatus.message = 'You are trap!';
+
+    }
+
+    if (this.gameStatus.over === true) {
+      clearInterval(this.drawIntervalId);
+      ctx.fillStyle = 'red';
+      this.ctx.font = this.gameStatus.font;
+      ctx.fillText(this.gameStatus.message, this.width * .5 - 80, 50);
+    }
+
+    if (this.tiefigthers.length === 0 && this.vaderties.length === 0) {
+      //alert('You Scape and will warp to met with the Rebels!')
+      swal("You Scape and will warp to met with the Rebels!", {
+          buttons: {
+            cancel: "Yoda",
+            catch: {
+              text: "Try again",
+              value: "catch",
+            },
+            defeat: true,
+          },
+        })
+        .then((value) => {
+          switch (value) {
+
+            case "defeat":
+              swal("Wars not make one great! You gained 100000 XP!");
+              break;
+
+            case "catch":
+              swal("The force is strong with you");
+              break;
+
+            default:
+              swal("A Jedi uses the Force for knowledge and defense, never for attack.");
+          }
+        });
+    }
 
   }
-/*
-  gameStatus(){
-    if(this.gameState.state === 'playing' && this. tiefigthers.length === 0){
-      state = 'victory';
-      this.textAnswer.title = 'You Win and will warp to met with the Rebels';
-      this.textAnswer.subtitle = 'Press R to continue';
-      this.textAnswer.count = 0;
+
+  shooting() {
+    if (this.lasershootsties.length === 0) {
+      this.lasershoot = new Lasershoot(this.ctx, this.x, this.y + 70);
+      this.lasershoots.push(this.lasershoot.tieShoots());
     }
-    if(this.textAnswer.count >=0){
-      this.textAnswer.contador++;
+  }
+  tieShoots() {
+    if (Math.floor(Math.random(0, this.tiefigthers.length * 10) === 5)) {
+      this.lasershootsties.push(this.lasershoottie.draw());
     }
   }
 
-  dText(){
-    if(this.textAnswer.count === -1 ) return;
-    const alpha = this.textAnswer.count / 50.0;
-    if(alpha>1){
-      for(let i in this.tiefigthers){
-            delete this.tiefigthers[i];
-      }
-    }
-    this.ctx.save();
-    this.ctx.globalAlpha = alpha;
-    if(this.gameState.state === 'lost'){
-      this.ctx.fillText(this.textAnswer.title, 120, 190);
-      this.ctx.fillstyle = 'white';
-      this.ctx.font = 'bold 40pt Arial';
-
-      this.ctx.fillText(this.textAnswer.subtitle, 120, 190);
-      this.ctx.fillstyle = 'white';
-      this.ctx.font = 'bold 40pt Arial';
-    }
-    if(this.gameState.state === 'victory'){
-      this.ctx.fillText(this.textAnswer.title, 120, 190);
-      this.ctx.fillstyle = 'white';
-      this.ctx.font = 'bold 40pt Arial';
-      this.ctx.fillText(this.textAnswer.subtitle, 120, 190);
-      this.ctx.fillstyle = 'white';
-      this.ctx.font = 'bold 40pt Arial';
-    }
-  }
-
-
-  shootsAdd(tiefigther){
-  return {
-  x: tiefigther.x,
-  y: tiefigther.y,
-  width: this.lasershootsties,
-  heigth: this.lasershootsties,
-  count: 0
-
-  
 }
-  }
-
-*/
-}
-

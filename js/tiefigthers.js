@@ -30,6 +30,8 @@ class Tiefigther {
       this.height = this.sprite.frameHeight;
 
     }
+    this.canFire = true;
+    this.lasershootsties = [];
   }
 
   draw() {
@@ -46,14 +48,14 @@ class Tiefigther {
         this.width,
         this.height
       );
+
     }
-   /* this.sounds = {
-      flyby: new Audio('scr','../asst/sound/tiefigther1.wav')
-    }*/
+    /* this.sounds = {
+       flyby: new Audio('scr','../asst/sound/tiefigther1.wav')
+     }*/
   }
 
   move() {
-
     this.x = this.x + this.dirX;
     this.y = this.y + this.dirY;
 
@@ -74,6 +76,7 @@ class Tiefigther {
       this.y += 105;
       this.sprite.horizontalFramesIndex = 2;
     }
+
   }
 
   collides(element) {

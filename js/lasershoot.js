@@ -8,7 +8,7 @@ class Lasershoot {
     this.vy = SPEED;
     this.width = 0;
     this.height = 0;
-    
+
     this.sprite = new Image();
     //this.sprite.src = './img/RogueSquadron/lasershoot.png';
     this.sprite.src = './img/RogueSquadron/Lasershoot1.png';
@@ -24,7 +24,6 @@ class Lasershoot {
       this.width = this.sprite.frameWidth;
       this.height = this.sprite.frameHeight;
     }
-
     this.drawCount = 0;
   }
 
@@ -41,19 +40,18 @@ class Lasershoot {
       this.height
     );
     this.drawCount++;
-    //this.animate();
   }
 
   move() {
     this.y -= this.vy;
-}
+  }
 
-collides(element) {
-  return this.x < element.x + element.width &&
-    this.x + this.width > element.x &&
-    this.y < element.y + element.height &&
-    this.y + this.height > element.y;
-}
+  collides(element) {
+    return this.x < element.x + element.width &&
+      this.x + this.width > element.x &&
+      this.y < element.y + element.height &&
+      this.y + this.height > element.y;
+  }
 
 
 }
