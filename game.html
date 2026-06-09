@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style/style.css">
-  <title>the Rouge X-Wing</title>
+  <title>Star Wars - The Rogue X-Wing</title>
 </head>
 
 <body>
@@ -14,16 +14,29 @@
     <canvas id="game-canvas" class="canvas-box"></canvas>
   </div>
 
+  <!-- SweetAlert para diálogos -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="js/lasershoottie.js"></script>
-  <script src="js/vadertie.js"></script>
-  <script src="js/lasershoot.js"></script>
-  <script src="js/tiefigthers.js"></script>
+
+  <!-- Scripts del juego en orden correcto -->
+  <!-- 1. Configuración y constantes -->
   <script src="js/constants.js"></script>
-  <script src="js/xwing.js"></script>
+
+  <!-- 2. Clases de elementos del juego -->
   <script src="js/background.js"></script>
-  <script src="js/game.js"></script>
+  <script src="js/lasershoot.js"></script>
+  <script src="js/lasershoottie.js"></script>
+  <script src="js/xwing.js"></script>
+  <script src="js/tiefigthers.js"></script>
+  <script src="js/vadertie.js"></script>
+
+  <!-- 3. Gestores del juego -->
+  <script src="js/levelManager.js"></script>
+  <script src="js/uiManager.js"></script>
+  <script src="js/gameManager.js"></script>
+
+  <!-- 4. Script principal (inicializar juego) -->
   <script src="js/index.js"></script>
+
 </body>
 
 </html>
